@@ -13,6 +13,7 @@ INCLUDE_DIRECTORIES (
 
 ADD_LIBRARY (sqlitepp
 	src/database.cpp
+	src/statement.cpp
 )
 TARGET_LINK_LIBRARIES (sqlitepp
 	sqlite3

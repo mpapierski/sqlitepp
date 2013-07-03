@@ -1,3 +1,4 @@
+#include "sqlitepp/statement.hpp"
 #include "sqlitepp/database.hpp"
 
 using namespace sqlitepp;

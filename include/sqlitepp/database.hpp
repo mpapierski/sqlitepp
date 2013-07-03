@@ -8,6 +8,8 @@
 
 namespace sqlitepp {
 
+class statement;
+
 /**
  * This is a simple wrapper around SQLite connection.
  * You do not have to explicitly close connection.
@@ -15,6 +17,7 @@ namespace sqlitepp {
 class database
 {
 public:
+	friend class statement;
 	/**
 	 * Create new database connection.
 	 * @param address Database name (like "db.sqlite")
@@ -28,6 +31,14 @@ private:
 	 * Connection pointer
 	 */
 	::sqlite3 * db_;
+	/**
+	 * Copies not allowed
+	 */
+	database(const database &);
+	/**
+	 * Assignment not allowed
+	 */
+	database & operator=(const database &);
 };
 
 } /* /sqlitepp */
