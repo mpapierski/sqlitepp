@@ -13,11 +13,13 @@ class statement
 {
 public:
 	statement(database * db, const ::std::string & query);
+	bool exec();
 private:
 	database * db_;
 	std::string query_;
 	::sqlite3_stmt * stmt_;
-	void prepare();
+	statement(const statement &);
+	statement & operator=(const statement &);
 };
 
 } /* /sqlitepp */

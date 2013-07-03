@@ -15,3 +15,10 @@ statement::statement(database * db, const ::std::string & query)
 		throw std::runtime_error(message);
 	}
 }
+
+bool statement::exec()
+{
+	assert(db_->db_);
+	int result = ::sqlite3_step(stmt_);
+	return (result == SQLITE_ROW) || (result == SQLITE_DONE);
+}
