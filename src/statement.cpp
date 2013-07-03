@@ -16,9 +16,27 @@ statement::statement(database * db, const ::std::string & query)
 	}
 }
 
+statement::~statement()
+{
+	if (stmt_)
+	{
+		::sqlite3_finalize(stmt_);
+		stmt_ = NULL;
+	}
+}
+
 bool statement::exec()
 {
 	assert(db_->db_);
 	int result = ::sqlite3_step(stmt_);
-	return (result == SQLITE_ROW) || (result == SQLITE_DONE);
+	if (result == SQLITE_ERROR)
+	{
+		std::string error = ::sqlite3_errmsg(db_->db_);
+		throw std::runtime_error(error);
+	}
+	else
+	{
+		// TODO: handle SQLITE_BUSY internally
+		return (result == SQLITE_ROW) || (result == SQLITE_DONE);
+	}
 }

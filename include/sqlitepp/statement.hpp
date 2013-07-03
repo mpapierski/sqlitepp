@@ -13,6 +13,7 @@ class statement
 {
 public:
 	statement(database * db, const ::std::string & query);
+	~statement();
 	bool exec();
 private:
 	database * db_;
